@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 import { validationResult } from 'express-validator'
 import { ValidationPath } from '../interfaces/validation'
 import { logger } from '../utils/logger'
-import { auth } from './validators'
+import { accounts, auth } from './validators'
 
 const handleValidationError = (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req).formatWith(({ location, msg, param, value }) => {
@@ -26,6 +26,8 @@ export const validationMidlleware = (path: ValidationPath) => {
     switch (path) {
         case 'signup':
             return [...auth.signupValidator, handleValidationError]
+        case 'createAccount':
+            return [...accounts.createAccountValidator, handleValidationError]
 
         default:
             return [handleValidationError]

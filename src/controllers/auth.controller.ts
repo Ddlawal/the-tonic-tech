@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express'
 
 import { env, getCookieConfig, redisClient } from '../config'
-import { UserCredentials, UserI } from '../interfaces/auth'
-import { GenericResponse, RequestI } from '../interfaces/http'
+import { UserCredentials, UserI } from '../interfaces/auth.interface'
+import { GenericResponse, RequestI } from '../interfaces/http.interface'
 import { AuthService } from '../services/auth.service'
 
 export class AuthController {

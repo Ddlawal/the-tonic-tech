@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import express, { Router } from 'express'
 import { UserController } from '../../controllers/user.controller'
-import { Role } from '../../interfaces/auth'
+import { Role } from '../../interfaces/auth.interface'
 import { authenticate, authorize } from '../../middleware/auth.middleware'
 
 class User {
@@ -14,7 +14,8 @@ class User {
     }
 
     public routes(): Router {
-        this.UserRouter.get('/', authenticate, authorize(Role.ADMIN), this.UserController.getAllusers)
+        this.UserRouter.get('/', authenticate, authorize(Role.ADMIN), this.UserController.getAllUsers)
+        this.UserRouter.get('/me', authenticate, this.UserController.getUserDetails)
 
         return this.UserRouter
     }

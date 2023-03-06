@@ -1,6 +1,6 @@
 import { Request } from 'express'
 import { HydratedDocument } from 'mongoose'
-import { UserI } from './auth'
+import { UserI } from './auth.interface'
 
 export interface GenericResponse<T = unknown> {
     data?: T

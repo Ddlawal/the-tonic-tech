@@ -5,8 +5,8 @@ import { UserService } from '../services/user.service'
 import { getAuthByToken } from '../utils/auth'
 import { env, redisClient } from '../config'
 import { HttpException } from './errors.middleware'
-import { RequestI } from '../interfaces/http'
-import { RoleI } from '../interfaces/auth'
+import { RequestI } from '../interfaces/http.interface'
+import { RoleI } from '../interfaces/auth.interface'
 
 export const validateToken = async (access_token: string, secret = env.server.jwtSecret) => {
     if (!access_token) {

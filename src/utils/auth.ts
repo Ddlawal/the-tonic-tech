@@ -4,7 +4,7 @@ import { promisify } from 'util'
 
 import { logger } from './logger'
 import { env, redisClient } from '../config'
-import { Auth } from '../interfaces/auth'
+import { Auth } from '../interfaces/auth.interface'
 
 const signToken = promisify(jwt.sign)
 

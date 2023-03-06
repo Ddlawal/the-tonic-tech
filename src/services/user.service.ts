@@ -1,7 +1,7 @@
 import { Model, Types } from 'mongoose'
 
-import { UserI } from '../interfaces/auth'
-import { GenericResponse, GenericResponseWithPagination, QueryI } from '../interfaces/http'
+import { UserI } from '../interfaces/auth.interface'
+import { GenericResponseWithPagination, QueryI } from '../interfaces/http.interface'
 import { User } from '../schema'
 
 export class UserService {
@@ -17,7 +17,7 @@ export class UserService {
         return user
     }
 
-    public getAllusers = async ({
+    public getAllUsers = async ({
         page = 1,
         perPage = 10,
     }: QueryI): Promise<GenericResponseWithPagination<Array<Omit<UserI, 'password'>>>> => {

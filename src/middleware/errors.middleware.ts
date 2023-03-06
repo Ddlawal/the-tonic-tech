@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 import { INTERNAL_SERVER_ERROR } from 'http-status'
-import { GenericResponse } from '../interfaces/http'
+import { GenericResponse } from '../interfaces/http.interface'
 
 import { logger } from '../utils/logger'
 

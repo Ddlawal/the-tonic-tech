@@ -7,4 +7,4 @@ export type ValidationErrors = {
     value: string | number
 }
 
-export type ValidationPath = 'signup'
+export type ValidationPath = 'signup' | 'createAccount'
