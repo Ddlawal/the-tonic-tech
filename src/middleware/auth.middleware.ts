@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import httpStatus from 'http-status'
 
-import { AuthService } from '../services/user.service'
+import { UserService } from '../services/user.service'
 import { getAuthByToken } from '../utils/auth'
 import { env, redisClient } from '../config'
 import { HttpException } from './errors.middleware'
@@ -28,7 +28,7 @@ export const validateToken = async (access_token: string, secret = env.server.jw
     }
 
     // Check if user still exist
-    const user = await new AuthService().findUser(JSON.parse(session).uid)
+    const user = await new UserService().findUser(JSON.parse(session).uid)
 
     if (!user) {
         throw new HttpException(httpStatus.UNAUTHORIZED, 'Error! Unauthorized')

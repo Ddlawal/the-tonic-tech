@@ -13,9 +13,9 @@ export interface UserCredentials {
 }
 
 export enum Role {
-    ADMIN,
-    CUSTOMER,
-    TELLER,
+    ADMIN = 'ADMIN',
+    CUSTOMER = 'CUSTOMER',
+    TELLER = 'TELLER',
 }
 
 export type RoleI = keyof typeof Role

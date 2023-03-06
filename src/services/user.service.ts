@@ -1,9 +1,10 @@
 import { Model, Types } from 'mongoose'
 
 import { UserI } from '../interfaces/auth'
+import { GenericResponse, GenericResponseWithPagination, QueryI } from '../interfaces/http'
 import { User } from '../schema'
 
-export class AuthService {
+export class UserService {
     private userModel: Model<UserI>
 
     constructor() {
@@ -14,5 +15,24 @@ export class AuthService {
         const user = await this.userModel.findOne({ _id: new Types.ObjectId(userId) }).select('-password')
 
         return user
+    }
+
+    public getAllusers = async ({
+        page = 1,
+        perPage = 10,
+    }: QueryI): Promise<GenericResponseWithPagination<Array<Omit<UserI, 'password'>>>> => {
+        const skip = (Number(page) - 1) * Number(perPage)
+        const users = await this.userModel.find().skip(skip).limit(Number(perPage)).select('-password -__v').exec()
+        const totalCount = await this.userModel.count()
+        const totalPages = Math.ceil(totalCount / Number(perPage))
+
+        return {
+            currentPage: Number(page),
+            data: users,
+            message: 'Users retrieved successfully',
+            status: 'success',
+            totalCount,
+            totalPages,
+        }
     }
 }
