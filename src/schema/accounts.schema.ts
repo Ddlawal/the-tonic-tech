@@ -6,10 +6,10 @@ const AccountSchema = new mongoose.Schema<AccountI>(
         accountNo: { type: String, minlength: 10, maxlength: 10, required: true },
         accountType: { type: String, enum: AccountType, required: true },
         bvn: { type: String, minlength: 11, maxlength: 11, required: true },
-        userId: { type: Schema.Types.ObjectId, ref: 'User' },
+        userId: { type: Schema.Types.ObjectId, ref: 'users' },
     },
     {
-        collection: 'account',
+        collection: 'accounts',
         id: false,
         autoCreate: true,
         timestamps: true,
@@ -22,6 +22,6 @@ const AccountSchema = new mongoose.Schema<AccountI>(
     }
 )
 
-const Account = mongoose.model<AccountI>('account', AccountSchema)
+const Account = mongoose.model<AccountI>('accounts', AccountSchema)
 
 export default Account

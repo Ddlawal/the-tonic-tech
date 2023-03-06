@@ -3,10 +3,10 @@ import { TransactionI, TransactionStatus, TransactionType } from '../interfaces/
 
 const TransactionSchema = new mongoose.Schema<TransactionI>(
     {
-        from: { type: Schema.Types.ObjectId, ref: 'Account' },
-        userId: { type: Schema.Types.ObjectId, ref: 'User' },
+        from: { type: Schema.Types.ObjectId, ref: 'accounts' },
+        userId: { type: Schema.Types.ObjectId, ref: 'users' },
         amount: { type: Number, required: true },
-        to: { type: Schema.Types.ObjectId, ref: 'Account' },
+        to: { type: Schema.Types.ObjectId, ref: 'accounts' },
         narration: { tyoe: String },
         status: { type: String, enum: TransactionStatus, default: TransactionStatus.PENDING },
         transactionType: { type: String, enum: TransactionType, required: true },

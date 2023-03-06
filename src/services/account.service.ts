@@ -56,9 +56,10 @@ export class AccountService {
         const skip = (Number(page) - 1) * Number(perPage)
         const accounts = await this.accountModel
             .find()
+            .populate('userId', 'firstname lastname role')
             .skip(skip)
             .limit(Number(perPage))
-            .select('-password -__v')
+            .select('-__v')
             .exec()
 
         const totalCount = await this.accountModel.count()
