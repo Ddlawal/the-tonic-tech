@@ -37,7 +37,7 @@ export class AccountController {
     public getUserAccountDetails = async (req: RequestI, res: Response, next: NextFunction): Promise<void> => {
         try {
             const accountId = req.params.id as unknown as Types.ObjectId
-            const response = await this.accountService.getUserAccountById(accountId)
+            const response = await this.accountService.getUserAccountById(accountId, req.user?._id as Types.ObjectId)
 
             res.status(201).json(response)
         } catch (error) {

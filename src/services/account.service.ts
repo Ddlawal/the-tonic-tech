@@ -33,16 +33,17 @@ export class AccountService {
     }
 
     public getUserAccountById = async (
-        accountId: Types.ObjectId
-    ): Promise<GenericResponse<HydratedDocument<AccountI>>> => {
-        const account = await this.accountModel.findOne({ _id: new Types.ObjectId(accountId) })
+        accountId: Types.ObjectId,
+        userId: Types.ObjectId
+    ): Promise<GenericResponse<Array<HydratedDocument<AccountI>>>> => {
+        const accounts = await this.accountModel.find({ _id: new Types.ObjectId(accountId), userId })
 
-        if (!account) {
-            throw new HttpException(httpStatus.NOT_FOUND, 'Account not found')
+        if (!accounts.length) {
+            throw new HttpException(httpStatus.NOT_FOUND, 'No account found')
         }
 
         return {
-            data: account,
+            data: accounts,
             message: 'Account retrieved successfully',
             status: 'success',
         }
